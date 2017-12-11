@@ -1,5 +1,12 @@
 package hello;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;import java.util.stream.Collector;
@@ -34,4 +41,41 @@ public class GreetingController {
     	
     	return data.stream().filter(line -> line.startsWith(prefix)).collect(Collectors.toList());
     }
+    
+    @RequestMapping("/countries")
+    public String getCountries () throws IOException {
+//    	URL url = new URL ("http://www.webservicex.net/country.asmx/GetCountries");
+//    	URLConnection connection = url.openConnection();
+//    	connection.setDoOutput(true);
+    	
+    	URL url = new URL ("http://www.webservicex.net/globalweather.asmx/GetCitiesByCountry?CountryName=string");
+    	URLConnection connection = url.openConnection();
+//    	connection.setDoOutput(true);
+//    	connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+//    	connection.setRequestProperty("Content-Length", "0");
+    	    	
+    	InputStream stream = url.openConnection().getInputStream();
+    	InputStreamReader reader = new InputStreamReader(stream);
+    	BufferedReader buffer = new BufferedReader(reader);
+    	
+    	
+    	String line;
+    	StringBuilder builder = new StringBuilder();
+    	
+    	while ((line = buffer.readLine()) != null) {
+    		builder.append(line);
+    	}
+    	
+    	return builder.toString();
+//    	return new BufferedReader(new InputStreamReader(stream)).lines()
+//    					.collect(Collectors.joining("\n"));
+    	
+
+    }
+
 }
+
+
+// SOAP & REST
+// REST >> HTTP GET & HTTP POST
+// web service >> contoh penggunaan konversi realtime
