@@ -67,8 +67,7 @@ public class GreetingController {
     	}
     	
     	return builder.toString();
-//    	return new BufferedReader(new InputStreamReader(stream)).lines()
-//    					.collect(Collectors.joining("\n"));
+//    	return new BufferedReader(new InputStreamReader(stream)).lines().collect(Collectors.joining("\n"));
     	
 
     }
