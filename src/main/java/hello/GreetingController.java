@@ -38,6 +38,14 @@ public class GreetingController {
 		return em.createEntityManager().createQuery("from Actor").getResultList();
 	}
 	
+	@Autowired
+	private EntityManagerFactory ef;
+	
+	@RequestMapping ("/film")
+	public List<Film> allFilm (){
+		return ef.createEntityManager().createQuery("from Film").getResultList();
+	}
+	
 	@RequestMapping("/greeting")
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return x;
