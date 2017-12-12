@@ -16,10 +16,13 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Controller
 @RestController
 public class GreetingController {
 
@@ -33,17 +36,20 @@ public class GreetingController {
 	@Autowired
 	private EntityManagerFactory em;
 	
+	//cross origin : semua bisa akses web service
+	@CrossOrigin(origins= {"*"})
 	@RequestMapping ("/actors")
 	public List<Actor> allActor (){
 		return em.createEntityManager().createQuery("from Actor").getResultList();
 	}
 	
-	@Autowired
-	private EntityManagerFactory ef;
+//	@Autowired
+//	private EntityManagerFactory ef;
 	
+	@CrossOrigin(origins= {"*"})
 	@RequestMapping ("/film")
 	public List<Film> allFilm (){
-		return ef.createEntityManager().createQuery("from Film").getResultList();
+		return em.createEntityManager().createQuery("from Film").getResultList();
 	}
 	
 	@RequestMapping("/greeting")
